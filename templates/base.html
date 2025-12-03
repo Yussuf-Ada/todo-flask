@@ -2,15 +2,17 @@
 <html lang="en">
   <head>
     <title>Todo New task</title>
-    <link href="../static/css/style.css" rel="stylesheet" />
+    <link href={{url_for('static', filename='css/style.css')}} rel="stylesheet">
   </head>
   <body>
     <nav>
       <h1>Example Task List App</h1>
       <ul>
-        <li class="navlink"><a href="#">Home</a></li>
-        <li class="navlink"><a href="#">View Tasks</a></li>
-        <li class="navlink"><a href="#">New Task</a></li>
+        <li class="navlink"><a href="{{url_for('index')}}">Home</a></li>
+        <li class="navlink">
+          <a href="{{url_for('all_tasks')}}">View Tasks</a>
+        </li>
+        <li class="navlink"><a href="{{url_for('new_task')}}">New Task</a></li>
       </ul>
     </nav>
     <main>{%block main %} {% endblock %}</main>
