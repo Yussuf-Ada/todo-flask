@@ -3,12 +3,11 @@ from flask import render_template
 
 @app.route('/')
 def index():
-    # return "<h1>Todo index page</h1>"
     return render_template('index.html')
 
 @app.route('/tasks')
 def all_tasks():
-    return "<h1> List of all tasks </h1>"
+    return render_template('tasks.html')
 
 @app.route('/task/<int:task_id>')
 def task(task_id):
@@ -16,5 +15,6 @@ def task(task_id):
 
 @app.route('/new-task')
 def new_task():
-    return "<h1>Enter your new task</h1>"
+    return render_template('new_task.html')
+
 
