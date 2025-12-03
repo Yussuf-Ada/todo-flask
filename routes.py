@@ -1,5 +1,6 @@
 from app import app
 from flask import render_template,request,url_for,redirect
+from datetime import datetime
 
 todos = [
     {
@@ -36,9 +37,9 @@ def task(task_id):
     task = todos[task_id - 1]
     return render_template('task.html',task=task)
 
-@app.route('/new-task')
-def new_task():
-    return render_template('new_task.html')
+# @app.route('/new-task')
+# def new_task():
+#     return render_template('new_task.html')
 
 @app.route('/edit-task/<int:task_id>', methods=["GET", "POST"])
 def edit_task(task_id):
@@ -51,3 +52,18 @@ def edit_task(task_id):
         todos[index]["description"] = description 
         return redirect(url_for("task", task_id=task_id))       
     return render_template('task_form.html', task=task)
+
+@app.route("/new-task", methods=["GET", "POST"])
+def create_task():    
+    if request.method == "POST":
+        task_id = todos[-1]["id"] + 1
+        title = request.form.get("title")
+        description = request.form.get("description")
+        todos.append({
+         "id": task_id,
+         "title": title,
+         "description": description ,
+         "created_at": datetime.now()
+        })
+        return redirect(url_for("task", task_id=task_id))    
+    return render_template("task_form.html", task=None)
