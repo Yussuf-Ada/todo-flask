@@ -1,8 +1,10 @@
 from app import app
+from flask import render_template
 
 @app.route('/')
 def index():
-    return "<h1>Todo index page</h1>"
+    # return "<h1>Todo index page</h1>"
+    return render_template('index.html')
 
 @app.route('/tasks')
 def all_tasks():
