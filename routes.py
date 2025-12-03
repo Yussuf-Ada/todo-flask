@@ -67,3 +67,9 @@ def create_task():
         })
         return redirect(url_for("task", task_id=task_id))    
     return render_template("task_form.html", task=None)
+
+@app.route("/delete-task/<int:task_id>",methods=["POST"])
+def delete_task(task_id):
+    global todos
+    todos = [todo for todo in todos if todo["id"] !=task_id]
+    return redirect(url_for("all_tasks"))
